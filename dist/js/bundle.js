@@ -96,30 +96,25 @@
 function modalWindows() {
 
     let popupEngineer = document.querySelector(".popup_engineer"),
-        popup = document.querySelector('.popup');
-    overlay = document.querySelector(".overlay"),
+        popup = document.querySelector('.popup'),
         body = document.querySelector("body");
 
     let showModalEnginer = function () {
         popupEngineer.style.display = "block";
-        overlay.classList.add("more-splash");
         document.body.style.overflow = "hidden";
     };
     let showModalPopup = function () {
         popup.style.display = "block";
-        overlay.classList.add("more-splash");
         document.body.style.overflow = "hidden";
     };
     let hideModal = function () {
         popupEngineer.style.display = "none";
         popup.style.display = "none";
-        overlay.classList.remove("more-splash");
         document.body.style.overflow = "";
     };
 
     function showModal() {
         popup.style.display = "block";
-        overlay.classList.add("more-splash");
         document.body.style.overflow = "hidden";
     }
 
@@ -159,7 +154,7 @@ module.exports = modalWindows;
   !*** ./src/js/parts/tabs.js ***!
   \******************************/
 /*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
 
 function tabs() {
     let tab = document.querySelectorAll('.tab'),
@@ -169,10 +164,10 @@ function tabs() {
         infoTab = document.querySelectorAll('.info-tab');
 
     let hideTabContent = (a) => {
-        for (let i = a; i < infoTabcontent.length; i++) {
+        /* for (let i = a; i < infoTabcontent.length; i++) {
             infoTabcontent[i].classList.remove('show');
             infoTabcontent[i].classList.add('hide');
-        }
+        } */
         for (let i = a; i < infoTab.length; i++) {
             infoTab[i].classList.remove('show');
             infoTab[i].classList.add('hide');
@@ -183,10 +178,10 @@ function tabs() {
     
 
     let showTabContent = (b) => {
-        if (infoTabcontent[b].classList.contains('hide')) {
+        /* if (infoTabcontent[b].classList.contains('hide')) {
             infoTabcontent[b].classList.remove('hide');
             infoTabcontent[b].classList.add('show');
-        }
+        } */
         if (infoTab[b].classList.contains('hide')) {
             infoTab[b].classList.remove('hide');
             infoTab[b].classList.add('show');
@@ -196,7 +191,7 @@ function tabs() {
 
     slickTrack.addEventListener('click', function (event) {
         let target = event.target;
-        if (target && target.classList.contains('tab' || false)) {
+        if (target && target.classList.contains('tabs')) {
             for (let i = 0; i < tabs.length; i++) {
                 if (target == tabs[i]) {
 
@@ -226,7 +221,7 @@ window.addEventListener('DOMContentLoaded', function() {
         tabs = __webpack_require__(/*! ./parts/tabs.js */ "./src/js/parts/tabs.js");
 
     modal();
-    tabs();
+    /* tabs(); */
 });
 
 /***/ })

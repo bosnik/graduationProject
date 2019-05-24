@@ -1,30 +1,25 @@
 function modalWindows() {
 
     let popupEngineer = document.querySelector(".popup_engineer"),
-        popup = document.querySelector('.popup');
-    overlay = document.querySelector(".overlay"),
+        popup = document.querySelector('.popup'),
         body = document.querySelector("body");
 
     let showModalEnginer = function () {
         popupEngineer.style.display = "block";
-        overlay.classList.add("more-splash");
         document.body.style.overflow = "hidden";
     };
     let showModalPopup = function () {
         popup.style.display = "block";
-        overlay.classList.add("more-splash");
         document.body.style.overflow = "hidden";
     };
     let hideModal = function () {
         popupEngineer.style.display = "none";
         popup.style.display = "none";
-        overlay.classList.remove("more-splash");
         document.body.style.overflow = "";
     };
 
     function showModal() {
         popup.style.display = "block";
-        overlay.classList.add("more-splash");
         document.body.style.overflow = "hidden";
     }
 
