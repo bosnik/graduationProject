@@ -479,11 +479,14 @@ textarea:focus {
   padding: 2rem 2rem;
 }
 
-.glazing .aluminum,
-.glazing .plastic,
-.glazing .french,
-.glazing .rise {
+/* .glazing .info-tabcontent {
   display: none;
+} */
+.hide {
+  display:none;
+}
+.show {
+  display: flex;
 }
 
 .glazing a.active {
@@ -585,11 +588,11 @@ textarea:focus {
   font-style: normal;
   color: #000000;
 }
-
-.decoration .external,
-.decoration .rising,
-.decoration .roof {
-  display: none;
+.hide {
+  display:none;
+}
+.show {
+  display: flex;
 }
 
 /*Our works*/
