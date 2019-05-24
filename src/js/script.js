@@ -4,5 +4,5 @@ window.addEventListener('DOMContentLoaded', function() {
         tabs = require('./parts/tabs.js');
 
     modal();
-    /* tabs(); */
+    tabs();
 });

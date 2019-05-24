@@ -489,6 +489,11 @@ textarea:focus {
   display: flex;
 }
 
+.glazing a.noactive {
+  text-decoration: underline ;
+  color: #337ab7;
+}
+
 .glazing a.active {
   text-decoration: none;
   color: #454545;
@@ -588,12 +593,7 @@ textarea:focus {
   font-style: normal;
   color: #000000;
 }
-.hide {
-  display:none;
-}
-.show {
-  display: flex;
-}
+
 
 /*Our works*/
 .works {
