@@ -3,7 +3,9 @@ function tabs() {
         infoTabcontent = document.querySelectorAll('.info-tabcontent'),
         tabs = document.querySelectorAll('.tabs'),
         infoTab = document.querySelectorAll('.info-tab'),
-        afterClick = document.querySelectorAll('.afterClick');
+        afterClick = document.querySelectorAll('.afterClick'),
+        blockClick = document.querySelectorAll('.glazing_block '),
+        clickBlock = document.querySelectorAll('.clickBlock');
 
         let hideTabz = (z) => {
             for (let i = z; i < afterClick.length; i++) {
@@ -77,9 +79,9 @@ function tabs() {
     };
     document.body.addEventListener('click', function (event) {
         let target = event.target;
-        if (target && target.classList.contains('tab')) {
-            for (let i = 0; i < tab.length; i++) {
-                if (target == tab[i]) {
+        if (target && target.classList.contains('tab') || target.classList.contains('glazing_block') ) {
+            for (let i = 0; i < tab.length, i < blockClick.length; i++) {
+                if (target == tab[i] || target == blockClick[i]) {
 
                     hideTabContent(0);
                     showTabContent(i);
@@ -90,9 +92,9 @@ function tabs() {
             }
         }
        
-        if (target && target.classList.contains('tabs')) {
-            for (let i = 0; i < tabs.length; i++) {
-                if (target == tabs[i]) {
+        if (target && target.classList.contains('tabs') || target.classList.contains('clickBlock')) {
+            for (let i = 0; i < tabs.length, i < clickBlock.length; i++) {
+                if (target == tabs[i] || target == clickBlock[i]) {
                     hideTab(0);
                     showTab(i);
                     hideTabz(0);
