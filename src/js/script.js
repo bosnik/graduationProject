@@ -1,6 +1,6 @@
 import form from './parts/form';
 import modalCalc from './parts/modalCalc';
-window.addEventListener('DOMContentLoaded', function() {
+window.addEventListener('DOMContentLoaded', function () {
     'use strict';
     let modal = require('./parts/modal.js'),
         tabs = require('./parts/tabs.js'),

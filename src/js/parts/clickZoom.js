@@ -19,7 +19,7 @@ function clickZoom() {
         });
         document.body.style.overflow = "";
     }
-    
+
     function bigPictures(picture) {
 
         let pic = picture.closest('#bigImg');

@@ -3,18 +3,18 @@ function timer() {
 
     function getTimeRemaning(endtime) {
         let t = Date.parse(endtime) - Date.parse(new Date()),
-        
-        seconds = Math.floor((t/1000) % 60),
-        minutes = Math.floor((t/1000/60) % 60),
-        hours = Math.floor((t/(1000*60*60))),
-        days = Math.floor(t/(1000 * 60 * 60 * 24));
+
+            seconds = Math.floor((t / 1000) % 60),
+            minutes = Math.floor((t / 1000 / 60) % 60),
+            hours = Math.floor((t / (1000 * 60 * 60))),
+            days = Math.floor(t / (1000 * 60 * 60 * 24));
 
         return {
-            'total' : t,
-            'days' : days,
-            'hours' : hours,
-            'minutes' : minutes,
-            'seconds' : seconds
+            'total': t,
+            'days': days,
+            'hours': hours,
+            'minutes': minutes,
+            'seconds': seconds
         };
     }
 
@@ -26,20 +26,20 @@ function timer() {
             seconds = timer.querySelector('.seconds'),
             timeInterval = setInterval(updateClock, 1000);
 
-            function updateClock() {
-                let t = getTimeRemaning(endtime);
-                days.textContent = t.days;
-                hours.textContent = t.hours;
-                minutes.textContent = t.minutes;
-                seconds.textContent = t.seconds;
-               
-        if (t.total <= 0 &&  t.days <= 0 && t.hours <= 0 & t.minutes <= 0 && t.seconds <= 0) {
-            days.textContent = "00";
-            hours.textContent = "00";
-            minutes.textContent = "00";
-            seconds.textContent = "00";
+        function updateClock() {
+            let t = getTimeRemaning(endtime);
+            days.textContent = t.days;
+            hours.textContent = t.hours;
+            minutes.textContent = t.minutes;
+            seconds.textContent = t.seconds;
+
+            if (t.total <= 0 && t.days <= 0 && t.hours <= 0 & t.minutes <= 0 && t.seconds <= 0) {
+                days.textContent = "00";
+                hours.textContent = "00";
+                minutes.textContent = "00";
+                seconds.textContent = "00";
                 clearInterval(timeInterval);
-            }else{
+            } else {
                 days.textContent = ('0' + t.days).slice(-2);
                 hours.textContent = ('0' + t.hours).slice(-2);
                 minutes.textContent = ('0' + t.minutes).slice(-2);
@@ -49,6 +49,6 @@ function timer() {
     }
 
     setClock('timer', deadline);
-}    
-    
+}
+
 module.exports = timer;

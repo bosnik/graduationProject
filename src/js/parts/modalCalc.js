@@ -9,6 +9,7 @@ function modalCalc() {
         balconIcons = document.querySelector('.popup_calc_content'),
         type = document.querySelectorAll('.type'),
         type1 = document.querySelectorAll('.typeElem'),
+        type2 = document.querySelectorAll('.typeE'),
         input = document.querySelectorAll('.form-control'),
         width = document.getElementById('width'),
         height = document.getElementById('height'),
@@ -41,6 +42,7 @@ function modalCalc() {
         document.body.style.overflow = "";
     };
 
+
     let total = {};
 
     let w = width,
@@ -51,8 +53,8 @@ function modalCalc() {
 
         let typeWindow;
 
-        type1.forEach(e => {
-            if (e.classList.contains('block')) {
+        type2.forEach(e => {
+            if (e.classList.contains('do_image_more')) {
                 typeWindow = e.getAttribute('id');
             }
         });
@@ -65,13 +67,13 @@ function modalCalc() {
 
         total.width = w.value;
         total.heigh = h.value;
-        total.type1 = typeWindow;
+        total.type2 = typeWindow;
         total.material = material.value;
         total.temp = t;
 
         data_calc = total;
     }
-    
+
     function clearInputs() {
         [...input].forEach(elem => (elem.value = ""));
     }
@@ -83,7 +85,7 @@ function modalCalc() {
             showModalCalc(target);
         }
         if (target && target.classList.contains("popup_calc_button")) {
-            if ((w.value || h.value) && (w.value != 0 && h.value != 0)){
+            if ((w.value || h.value) && (w.value != 0 && h.value != 0)) {
                 calcTotal();
                 hideModal(target);
                 showModalCalcProfile(target);
@@ -95,30 +97,35 @@ function modalCalc() {
                 hideModalProfile(target);
                 showModalCalcEnd(target);
             }
-            
+
         }
-        
+
         if (target && target.classList.contains("popup_calc_closes", 'popup_calc')) {
             hideModal(target);
-           
+
         }
         if (target && target.classList.contains("popup_calc_profile_closes")) {
-            
+            total = {};
+            data_calc = {};
             hideModalProfile(target);
-            
+            clearInputs();
+            material.options[0].selected = true;
         }
         if (target && target.classList.contains("popup_calc_end_closes")) {
-           
+            total = {};
+            data_calc = {};
             hideModalEnd(target);
+            clearInputs();
+            material.options[0].selected = true;
         }
         if (target && target.classList.contains("popup_calc_end_close")) {
-			total = {};
-			data_calc = {};
-			hideModal(target);
-			clearInputs();
-			material.options[0].selected = true;
-		}
-       
+            total = {};
+            data_calc = {};
+            hideModalEnd(target);
+            clearInputs();
+            material.options[0].selected = true;
+        }
+
     });
 
     let hideTabf = (f) => {
@@ -139,8 +146,8 @@ function modalCalc() {
             type1[g].classList.add('text-center');
         }
     };
- let balconIconss = document.querySelectorAll('.typeE');
-  let hideTabc = (c) => {
+    let balconIconss = document.querySelectorAll('.typeE');
+    let hideTabc = (c) => {
         for (let i = c; i < type.length; i++) {
             balconIconss[i].classList.remove('.do_image_more');
             balconIconss[i].classList.add('doimage_more');
@@ -160,7 +167,7 @@ function modalCalc() {
 
     balconIcons.addEventListener('click', function (event) {
         let target = event.target;
-        if (target && target.classList.contains('type') || target.classList.contains('typeE') ) {
+        if (target && target.classList.contains('type') || target.classList.contains('typeE')) {
             for (let i = 0; i < type.length, i < balconIconss.length; i++) {
                 if (target == type[i] || target == balconIconss[i]) {
 
@@ -174,7 +181,7 @@ function modalCalc() {
         }
     });
 
-    
+
 
 }
 

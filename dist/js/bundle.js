@@ -114,7 +114,7 @@ function clickZoom() {
         });
         document.body.style.overflow = "";
     }
-    
+
     function bigPictures(picture) {
 
         let pic = picture.closest('#bigImg');
@@ -152,83 +152,85 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modalCalc__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modalCalc */ "./src/js/parts/modalCalc.js");
 
 
-    function form(elem) {
-        let message = {
-            loading: `<img src='https://img-fotki.yandex.ru/get/4914/54833049.21/0_803b8_ba6370a6_XS.jpg'>`,
-            success: `<img src='https://img-fotki.yandex.ru/get/5113/54833049.22/0_803bd_d6d87b9f_XS.jpg'>`,
-            failure: `<img src='https://img-fotki.yandex.ru/get/5810/54833049.22/0_803b9_56e09f93_XS.jpg'>`
-        };
-    
-        let form = document.querySelectorAll(".form"),
-            input = document.getElementsByTagName("input"),
-            statusMessage = document.createElement("div");
-    
-        statusMessage.classList.add("status");
-    
-        function sendForm(elem) {
-            elem.addEventListener("submit", function (e) {
-                e.preventDefault();
-    
-                elem.appendChild(statusMessage);
-    
-                let formData = new FormData(elem);
-                if (_modalCalc__WEBPACK_IMPORTED_MODULE_0__["data_calc"]) {
-                    for (let key in _modalCalc__WEBPACK_IMPORTED_MODULE_0__["data_calc"]) {
-                        formData.append(key, _modalCalc__WEBPACK_IMPORTED_MODULE_0__["data_calc"][key]);
-                    }
+function form() {
+    let message = {
+        loading: 'Загрузка...',
+        success: 'Отправленно',
+        failure: 'Ошибка отправки!'
+    };
+
+    let form = document.querySelectorAll(".form"),
+        input = document.getElementsByTagName("input"),
+        statusMessage = document.createElement("div");
+
+    statusMessage.classList.add("status");
+
+    function sendForm(elem) {
+        elem.addEventListener("submit", function (e) {
+            e.preventDefault();
+
+            elem.appendChild(statusMessage);
+
+            let formData = new FormData(elem);
+            if (_modalCalc__WEBPACK_IMPORTED_MODULE_0__["data_calc"]) {
+                for (let key in _modalCalc__WEBPACK_IMPORTED_MODULE_0__["data_calc"]) {
+                    formData.append(key, _modalCalc__WEBPACK_IMPORTED_MODULE_0__["data_calc"][key]);
                 }
-    
-                function postData(data) {
-                    return new Promise(function (resolve, reject) {
-                        let request = new XMLHttpRequest();
-    
-                        request.open("POST", "server.php");
-    
-                        request.setRequestHeader(
-                            "Content-Type",
-                            "application/json; charset=utf-8"
-                        );
-    
-                        request.onreadystatechange = function () {
-                            if (request.readyState < 4) {
-                                resolve();
-                            } else if (request.readyState === 4) {
-                                if (request.status == 200 && request.status < 3) {
-                                    resolve();
-                                } else {
-                                    reject();
-                                }
-                            }
-                        };
-                        request.send(data);
+            }
+
+            function postData(data) {
+                return new Promise(function (resolve, reject) {
+                    let request = new XMLHttpRequest();
+
+                    request.open("POST", "server.php");
+
+                    request.setRequestHeader('Content-type', 'application/json; charset=utf-8');
+                    let obj = {}; // 
+                    data.forEach(function (value, key) {
+                        obj[key] = value;
                     });
-                } // End postData
-    
-                function clearInputs() {
-                    [...input].forEach(elem => (elem.value = ""));
-                }
-                function clerObj(data_calc) {
-                    data_calc = {};
-                    return data_calc;
-                }
-                postData(formData)
-                    .then(() => (statusMessage.innerHTML = message.loading))
-                    .then(() => (statusMessage.innerHTML = message.success))
-                    .catch(() => (statusMessage.innerHTML = message.failure))
-                    .then(clearInputs)
-                    .then(clerObj(_modalCalc__WEBPACK_IMPORTED_MODULE_0__["data_calc"]));
-            });
-        }
-    
-        [...form].forEach(function (element) {
-            sendForm(element);
+
+                    let json = JSON.stringify(obj);
+
+                    request.send(json);
+
+                    request.onreadystatechange = function () {
+                        if (request.readyState < 4) {
+                            resolve();
+                        } else if (request.readyState === 4) {
+                            if (request.status == 200 && request.status < 3) {
+                                resolve();
+                            } else {
+                                reject();
+                            }
+                        }
+                    };
+
+                });
+            }
+
+            function clearInputs() {
+                [...input].forEach(elem => (elem.value = ""));
+            }
+
+            function clerObj(data_calc) {
+                data_calc = {};
+                return data_calc;
+            }
+            postData(formData)
+                .then(() => (statusMessage.innerHTML = message.loading))
+                .then(() => (statusMessage.innerHTML = message.success))
+                .catch(() => (statusMessage.innerHTML = message.failure))
+                .then(clearInputs)
+                .then(clerObj(_modalCalc__WEBPACK_IMPORTED_MODULE_0__["data_calc"]));
         });
     }
 
+    [...form].forEach(function (element) {
+        sendForm(element);
+    });
+}
 
-
-/* 
-module.exports = form; */
 /* harmony default export */ __webpack_exports__["default"] = (form);
 
 /***/ }),
@@ -317,6 +319,7 @@ function modalCalc() {
         balconIcons = document.querySelector('.popup_calc_content'),
         type = document.querySelectorAll('.type'),
         type1 = document.querySelectorAll('.typeElem'),
+        type2 = document.querySelectorAll('.typeE'),
         input = document.querySelectorAll('.form-control'),
         width = document.getElementById('width'),
         height = document.getElementById('height'),
@@ -349,6 +352,7 @@ function modalCalc() {
         document.body.style.overflow = "";
     };
 
+
     let total = {};
 
     let w = width,
@@ -357,11 +361,11 @@ function modalCalc() {
 
     function calcTotal() {
 
-        let type_w;
+        let typeWindow;
 
-        type1.forEach(e => {
-            if (e.classList.contains('block')) {
-                type_w = e.getAttribute('id');
+        type2.forEach(e => {
+            if (e.classList.contains('do_image_more')) {
+                typeWindow = e.getAttribute('id');
             }
         });
 
@@ -373,13 +377,13 @@ function modalCalc() {
 
         total.width = w.value;
         total.heigh = h.value;
-        total.type1 = type_w;
+        total.type2 = typeWindow;
         total.material = material.value;
         total.temp = t;
 
         data_calc = total;
     }
-    
+
     function clearInputs() {
         [...input].forEach(elem => (elem.value = ""));
     }
@@ -391,7 +395,7 @@ function modalCalc() {
             showModalCalc(target);
         }
         if (target && target.classList.contains("popup_calc_button")) {
-            if ((w.value || h.value) && (w.value != 0 && h.value != 0)){
+            if ((w.value || h.value) && (w.value != 0 && h.value != 0)) {
                 calcTotal();
                 hideModal(target);
                 showModalCalcProfile(target);
@@ -403,30 +407,35 @@ function modalCalc() {
                 hideModalProfile(target);
                 showModalCalcEnd(target);
             }
-            
+
         }
-        
+
         if (target && target.classList.contains("popup_calc_closes", 'popup_calc')) {
             hideModal(target);
-           
+
         }
         if (target && target.classList.contains("popup_calc_profile_closes")) {
-            
+            total = {};
+            data_calc = {};
             hideModalProfile(target);
-            
+            clearInputs();
+            material.options[0].selected = true;
         }
         if (target && target.classList.contains("popup_calc_end_closes")) {
-           
+            total = {};
+            data_calc = {};
             hideModalEnd(target);
+            clearInputs();
+            material.options[0].selected = true;
         }
         if (target && target.classList.contains("popup_calc_end_close")) {
-			total = {};
-			data_calc = {};
-			hideModal(target);
-			clearInputs();
-			material.options[0].selected = true;
-		}
-       
+            total = {};
+            data_calc = {};
+            hideModalEnd(target);
+            clearInputs();
+            material.options[0].selected = true;
+        }
+
     });
 
     let hideTabf = (f) => {
@@ -447,8 +456,8 @@ function modalCalc() {
             type1[g].classList.add('text-center');
         }
     };
- let balconIconss = document.querySelectorAll('.typeE');
-  let hideTabc = (c) => {
+    let balconIconss = document.querySelectorAll('.typeE');
+    let hideTabc = (c) => {
         for (let i = c; i < type.length; i++) {
             balconIconss[i].classList.remove('.do_image_more');
             balconIconss[i].classList.add('doimage_more');
@@ -468,7 +477,7 @@ function modalCalc() {
 
     balconIcons.addEventListener('click', function (event) {
         let target = event.target;
-        if (target && target.classList.contains('type') || target.classList.contains('typeE') ) {
+        if (target && target.classList.contains('type') || target.classList.contains('typeE')) {
             for (let i = 0; i < type.length, i < balconIconss.length; i++) {
                 if (target == type[i] || target == balconIconss[i]) {
 
@@ -482,13 +491,12 @@ function modalCalc() {
         }
     });
 
-    
+
 
 }
 
-
 /* harmony default export */ __webpack_exports__["default"] = (modalCalc);
-/* module.exports = modalCalc; */
+
 
 /***/ }),
 
@@ -625,18 +633,18 @@ function timer() {
 
     function getTimeRemaning(endtime) {
         let t = Date.parse(endtime) - Date.parse(new Date()),
-        
-        seconds = Math.floor((t/1000) % 60),
-        minutes = Math.floor((t/1000/60) % 60),
-        hours = Math.floor((t/(1000*60*60))),
-        days = Math.floor(t/(1000 * 60 * 60 * 24));
+
+            seconds = Math.floor((t / 1000) % 60),
+            minutes = Math.floor((t / 1000 / 60) % 60),
+            hours = Math.floor((t / (1000 * 60 * 60))),
+            days = Math.floor(t / (1000 * 60 * 60 * 24));
 
         return {
-            'total' : t,
-            'days' : days,
-            'hours' : hours,
-            'minutes' : minutes,
-            'seconds' : seconds
+            'total': t,
+            'days': days,
+            'hours': hours,
+            'minutes': minutes,
+            'seconds': seconds
         };
     }
 
@@ -648,20 +656,20 @@ function timer() {
             seconds = timer.querySelector('.seconds'),
             timeInterval = setInterval(updateClock, 1000);
 
-            function updateClock() {
-                let t = getTimeRemaning(endtime);
-                days.textContent = t.days;
-                hours.textContent = t.hours;
-                minutes.textContent = t.minutes;
-                seconds.textContent = t.seconds;
-               
-        if (t.total <= 0 &&  t.days <= 0 && t.hours <= 0 & t.minutes <= 0 && t.seconds <= 0) {
-            days.textContent = "00";
-            hours.textContent = "00";
-            minutes.textContent = "00";
-            seconds.textContent = "00";
+        function updateClock() {
+            let t = getTimeRemaning(endtime);
+            days.textContent = t.days;
+            hours.textContent = t.hours;
+            minutes.textContent = t.minutes;
+            seconds.textContent = t.seconds;
+
+            if (t.total <= 0 && t.days <= 0 && t.hours <= 0 & t.minutes <= 0 && t.seconds <= 0) {
+                days.textContent = "00";
+                hours.textContent = "00";
+                minutes.textContent = "00";
+                seconds.textContent = "00";
                 clearInterval(timeInterval);
-            }else{
+            } else {
                 days.textContent = ('0' + t.days).slice(-2);
                 hours.textContent = ('0' + t.hours).slice(-2);
                 minutes.textContent = ('0' + t.minutes).slice(-2);
@@ -671,8 +679,8 @@ function timer() {
     }
 
     setClock('timer', deadline);
-}    
-    
+}
+
 module.exports = timer;
 
 /***/ }),
@@ -686,12 +694,13 @@ module.exports = timer;
 
 function validatorPhone() {
     document.body.addEventListener('input', e => {
-        if (e.target.getAttribute('type') === 'tel' ) {
+        if (e.target.getAttribute('type') === 'tel') {
             e.target.value = '+' + e.target.value.replace(/[^\d]/g, '').slice(0, 11);
             if (e.target.value.length == 1) e.target.value = '';
-        }if (e.target.getAttribute('type') === 'number') {
+        }
+        if (e.target.getAttribute('type') === 'number') {
             e.target.value = e.target.value.replace(/[^\d]/g, '').slice(0, 4);
-           }
+        }
     });
 }
 
@@ -712,14 +721,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _parts_modalCalc__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./parts/modalCalc */ "./src/js/parts/modalCalc.js");
 
 
-window.addEventListener('DOMContentLoaded', function() {
+window.addEventListener('DOMContentLoaded', function () {
     'use strict';
     let modal = __webpack_require__(/*! ./parts/modal.js */ "./src/js/parts/modal.js"),
         tabs = __webpack_require__(/*! ./parts/tabs.js */ "./src/js/parts/tabs.js"),
         clickZoom = __webpack_require__(/*! ./parts/clickZoom.js */ "./src/js/parts/clickZoom.js"),
         timer = __webpack_require__(/*! ./parts/timer.js */ "./src/js/parts/timer.js"),
-       /*  modalCalc = require('./parts/modalCalc'),
-        form = require('./parts/form.js'), */
         validatorPhone = __webpack_require__(/*! ./parts/validatorPhone.js */ "./src/js/parts/validatorPhone.js");
 
 
