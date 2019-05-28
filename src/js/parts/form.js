@@ -2,10 +2,11 @@ import modalCalc, { data_calc } from './modalCalc';
 
     function form(elem) {
         let message = {
-            loading: `<img src='https://img-fotki.yandex.ru/get/4914/54833049.21/0_803b8_ba6370a6_XS.jpg'>`,
-            success: `<img src='https://img-fotki.yandex.ru/get/5113/54833049.22/0_803bd_d6d87b9f_XS.jpg'>`,
-            failure: `<img src='https://img-fotki.yandex.ru/get/5810/54833049.22/0_803b9_56e09f93_XS.jpg'>`
+            loading: 'Загрузка...',
+            success: 'Отправленно',
+            failure: 'Ошибка отправки!'
         };
+        
     
         let form = document.querySelectorAll(".form"),
             input = document.getElementsByTagName("input"),
@@ -32,10 +33,15 @@ import modalCalc, { data_calc } from './modalCalc';
     
                         request.open("POST", "server.php");
     
-                        request.setRequestHeader(
-                            "Content-Type",
-                            "application/json; charset=utf-8"
-                        );
+                        request.setRequestHeader('Content-type', 'application/json; charset=utf-8');
+                    let obj = {}; // 
+                    data.forEach(function (value, key) {
+                        obj[key] = value;
+                    });
+                   
+                    let json = JSON.stringify(obj); 
+
+                    request.send(json);
     
                         request.onreadystatechange = function () {
                             if (request.readyState < 4) {
@@ -48,9 +54,9 @@ import modalCalc, { data_calc } from './modalCalc';
                                 }
                             }
                         };
-                        request.send(data);
+                       
                     });
-                } // End postData
+                } 
     
                 function clearInputs() {
                     [...input].forEach(elem => (elem.value = ""));
@@ -73,8 +79,4 @@ import modalCalc, { data_calc } from './modalCalc';
         });
     }
 
-
-
-/* 
-module.exports = form; */
 export default form;

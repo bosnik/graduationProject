@@ -49,11 +49,11 @@ function modalCalc() {
 
     function calcTotal() {
 
-        let type_w;
+        let typeWindow;
 
         type1.forEach(e => {
             if (e.classList.contains('block')) {
-                type_w = e.getAttribute('id');
+                typeWindow = e.getAttribute('id');
             }
         });
 
@@ -65,7 +65,7 @@ function modalCalc() {
 
         total.width = w.value;
         total.heigh = h.value;
-        total.type1 = type_w;
+        total.type1 = typeWindow;
         total.material = material.value;
         total.temp = t;
 
@@ -178,6 +178,4 @@ function modalCalc() {
 
 }
 
-
 export default modalCalc;
-/* module.exports = modalCalc; */

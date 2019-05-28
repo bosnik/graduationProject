@@ -6,8 +6,6 @@ window.addEventListener('DOMContentLoaded', function() {
         tabs = require('./parts/tabs.js'),
         clickZoom = require('./parts/clickZoom.js'),
         timer = require('./parts/timer.js'),
-       /*  modalCalc = require('./parts/modalCalc'),
-        form = require('./parts/form.js'), */
         validatorPhone = require('./parts/validatorPhone.js');
 
 
