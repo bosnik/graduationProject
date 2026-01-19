@@ -4,7 +4,7 @@
   "description": "",
   "main": "webpack.config.js",
   "dependencies": {
-    "fsevents": "^1.2.9",
+    "fsevents": "^1.2.13",
     "nan": "^2.14.0",
     "webpack": "^4.32.2"
   },
