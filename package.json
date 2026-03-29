@@ -6,7 +6,7 @@
   "dependencies": {
     "fsevents": "^1.2.9",
     "nan": "^2.14.0",
-    "webpack": "^4.32.2"
+    "webpack": "^5.105.4"
   },
   "devDependencies": {
     "webpack-cli": "^3.3.2"
